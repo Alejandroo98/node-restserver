@@ -22,7 +22,7 @@ let usuarioSchema = new Schema({
     
     password : {
         type : String,
-        required : [true , 'La contraseña es obligatoria']
+        required : [ true , 'La contraseña es obligatoria' ]
     },
     
     img : {
@@ -44,10 +44,15 @@ let usuarioSchema = new Schema({
     google : {
         type : Boolean,
         default : false
+    },
+
+    state : {
+        type : String
     }
     
 });
 
+//Esto sirve para ocultar el password al momento de imprimirno en pantalla
 usuarioSchema.methods.toJSON = function() {
     let user = this;
     let userObject = user.toObject();
@@ -57,6 +62,6 @@ usuarioSchema.methods.toJSON = function() {
 
 
 usuarioSchema.plugin( uniqueValidator , { message : '{PATH} debe de ser unico' } )
-module.exports = mongoose.model( 'Usuarios' , usuarioSchema )
+module.exports = mongoose.model( 'users' , usuarioSchema )
 
 

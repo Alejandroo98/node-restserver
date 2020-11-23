@@ -29,4 +29,5 @@ Borrado de archivos
 Eliminado físico de la base de datos
 Eliminación por estado en un campo de la colección
 
-//C.100   Good luck 06-11-20       You got it!!
+//C.100   Good luck 06-11-20       You got it!!    
+//I´m here!!!  I am back and I am still alive  ->  16-11-20!  You get it!

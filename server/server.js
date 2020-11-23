@@ -17,9 +17,9 @@ app.use(bodyParser.json())
 
 
   //Mongoose DB
-  mongoose.connect('mongodb://localhost:27017/cafe' , { useNewUrlParser : true  , useUnifiedTopology : true } , ( err , res) => {
+  mongoose.connect( process.env.URLDB , { useNewUrlParser : true  , useUnifiedTopology : true , useCreateIndex : true } , ( err , res) => {
       if( err ) throw err;
-      console.log('Data base is alive in port 27017');
+      console.log('Data base is alive in port ' , process.env.URLDB);
   });
   
 

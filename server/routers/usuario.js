@@ -4,6 +4,7 @@ const app = express()
 const User = require('../models/usurio')
 const bodyParser = require('body-parser');
 const _ = require('underscore');
+const { count, findOneAndDelete, findByIdAndRemove } = require('../models/usurio');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
@@ -19,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
         limit = Number(limit); // asi es como lo pediremos desde postman -> {{url}}/users?limite=15
         //Y si quiero utulizar los dos al mismo tiempo lo hago asi -> {{url}}/users?desde=10&limite=5
 
-        User.find()
+        User.find( { estado : true } , 'name google email password estado' )
         .skip( desde ) //Skipt es desde que posicion quieres los datos
         .limit( limit )//Limit nos serviara para logicamente poner un limite de datos que queremos ver
                 .exec( ( err , users ) => { //.exec quiere decir que ejecute en este caso el find() y esto es lo que nos tendra la respuesta y la guardara en users
@@ -30,30 +31,34 @@ app.use(bodyParser.urlencoded({ extended: false }));
                         err
                     })
 
-                    res.json({
-                        ok : true,
-                        users
+                    User.countDocuments( { estado : true } , ( err , counting ) => {
+                        res.json({
+                            ok : true,
+                            users,
+                            counting
+                        })
                     })
-                    
+                        
                 })
         
     })
 
 
    
-   app.post('/user', function( req , res ) {
+   app.post('/users', function( req , res ) {
     //let body = req.body;  //El req.body es la informacion que provien de postman opcion ->  Body x-www-form-urlencoded
 
-    let body = _.pick( req.body , [ 'name' , 'email' , 'img' , 'role' , 'estado' ] )
+    let body = _.pick( req.body , [ 'name' , 'email' , 'img' , 'role' , 'estado' , 'state' , 'password' ] ); //Esto son los unicos valores que tomara en cuenta
     
         let user = new User({
            name : body.name,
            email : body.email,
-           password : bcrypt.hashSync( body.password , 10 ),
-           role : body.role
+           password :bcrypt.hashSync( body.password , 10 ),
+           role : body.role,
+           state : body.state
        })
 
-       user.save( ( err , userDB ) => {
+       user.save(  ( err , userDB ) => {    //User.save( user , ( err , userDB ) => {   
 
         if( err )
         return res.status(400).json({
@@ -70,12 +75,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
        
     })
   
-    app.put('/user/:id', function ( req , res ) {
+    app.put('/users/:id', function ( req , res ) {
   
         let id = req.params.id
         let body = req.body;
 
-        User.findByIdAndUpdate( id , body , { new : true , runValidators : true } , ( err , userDB ) => { //Esto lo que hace es que lo busca por el id y lo actualiza si lo encuentra
+        User.findByIdAndUpdate( id , body , { new : true , runValidators : true , useFindAndModify : false} , ( err , userDB ) => { //Esto lo que hace es que lo busca por el id y lo actualiza si lo encuentra
 
             if( err )
             return res.status(400).json({
@@ -85,13 +90,66 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
             res.json({
                 ok : true,
-                usuario : userDB
+                userDB
             })
             
         } )
 
   
     })
+
+    app.delete('/users/:id' , function( req , res ){
+
+        let id = req.params.id
+        let body = req.body;
+
+        User.findByIdAndUpdate( id , { estado : false } , { new : true , runValidators : true } , ( err , userDB ) => { //Esto lo que hace es que lo busca por el id y lo actualiza si lo encuentra
+            
+
+            if( err )
+            return res.status(400).json({
+                ok : false,
+                err
+            })
+
+            
+            res.json({
+                ok : true,
+                userDB
+            })
+            
+        } )
+        
+
+        // User.findByIdAndRemove( id , ( err , userRemove ) => {
+
+        //     if( err ){
+        //         return res.status(400).json({
+        //             ok : false,
+        //             err
+        //         })
+        //     }
+
+        //     if( !userRemove )
+        //     return res.status(400).json({
+        //         ok : false,
+        //         err : {
+        //             message : 'Usuario no encontrado'
+        //         }
+        //     })
+            
+
+        //     res.json({
+        //         ok : true,
+        //         userRemove
+        //     })
+            
+            
+        // } )
+        
+        
+    })
+    
   
     app.patch('/user', function ( req , res ) {
       res.json('patch World');
