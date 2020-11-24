@@ -1,7 +1,12 @@
 //===============================================
-//=====================PORT======================
+//PORT
 //===============================================
 process.env.PORT = process.env.PORT || 3000;
+
+//===============================================
+//Entorno
+//===============================================
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 let urlDB;
@@ -14,4 +19,16 @@ let urlDB;
 
 process.env.URLDB = urlDB;  //URLDB  es un nombre creado en esta linea
 
+//===============================================
+//Vencimiento del token
+//===============================================
+//60 segundos
+//60 minutos
+//24 horas
+//30 dias
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30; //CADUCIDAD_TOKEN es una variable creada en este linea
 
+//===============================================
+//SEED de autenticacion
+//===============================================
+process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo' //SEED es una variable creada en este linea - La usamos en el archiv login.js

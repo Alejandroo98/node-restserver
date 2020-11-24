@@ -5,6 +5,7 @@ const User = require('../models/usurio')
 const bodyParser = require('body-parser');
 const _ = require('underscore');
 const { count, findOneAndDelete, findByIdAndRemove } = require('../models/usurio');
+const { verificarToken , verificarAdmin_Role } = require('../middlewares/autenticacion')
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
@@ -12,7 +13,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
         res.json('Hello World Local');
     });
 
-    app.get( '/users' , function( req , res ){
+    app.get( '/users' ,  verificarToken , ( req , res ) => {
+
+
+        return res.json({ //Esto proviendel archivo autentication -> req.user = decoded.user
+            user : req.user, 
+            name : req.user.name,
+            email : req.user.email
+            
+        })
 
         let desde = req.query.desde || 0;
         desde = Number(desde); // asi es como lo pediremos desde postman -> {{url}}/users?desde=15  
@@ -20,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
         limit = Number(limit); // asi es como lo pediremos desde postman -> {{url}}/users?limite=15
         //Y si quiero utulizar los dos al mismo tiempo lo hago asi -> {{url}}/users?desde=10&limite=5
 
-        User.find( { estado : true } , 'name google email password estado' )
+        User.find( {} , 'name google email password estado' )
         .skip( desde ) //Skipt es desde que posicion quieres los datos
         .limit( limit )//Limit nos serviara para logicamente poner un limite de datos que queremos ver
                 .exec( ( err , users ) => { //.exec quiere decir que ejecute en este caso el find() y esto es lo que nos tendra la respuesta y la guardara en users
@@ -45,7 +54,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
    
-   app.post('/users', function( req , res ) {
+   app.post('/users',  [verificarToken , verificarAdmin_Role ] ,( req , res ) => {  //Para agregar dos o mas middleware los ponemso entre -> []
     //let body = req.body;  //El req.body es la informacion que provien de postman opcion ->  Body x-www-form-urlencoded
 
     let body = _.pick( req.body , [ 'name' , 'email' , 'img' , 'role' , 'estado' , 'state' , 'password' ] ); //Esto son los unicos valores que tomara en cuenta
@@ -75,7 +84,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
        
     })
   
-    app.put('/users/:id', function ( req , res ) {
+    app.put('/users/:id', verificarToken , ( req , res ) => {
   
         let id = req.params.id
         let body = req.body;
@@ -98,7 +107,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
   
     })
 
-    app.delete('/users/:id' , function( req , res ){
+    app.delete('/users/:id' , verificarToken , ( req , res ) => {
 
         let id = req.params.id
         let body = req.body;

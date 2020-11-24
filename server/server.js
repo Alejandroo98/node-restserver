@@ -7,7 +7,9 @@ mongoose.set('useCreateIndex', true);
 // require('./config/config')
 
 // parse application/x-www-form-urlencoded
-app.use(require('./routers/usuario.js'))
+
+//Configuracion global de rutas
+app.use(require('./routers/index.js'))
 
 app.use(bodyParser.urlencoded({ extended: false }))  // Todos los comuandos que tengan  'use' quiere decir que son unos midelwarse es decir que cada peeticion que se haga siempre pasara primero por un 'use' si asi lo quieres
  
