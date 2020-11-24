@@ -1,0 +1,14 @@
+//PASOS PARA CONECTARNOS A UNA BASE DE DATOS DE MONGOD C.107
+mongodb+srv://Alava-own:<password>@cluster-1.nio54.mongodb.net/cafe
+
+(Primero tiene que crear un clouster en mongodb e ingrear en la parte de coection y poner conectar con mongo compas y copiar el link que esta ahi, es parecido al que esta arriba)
+1. Copia lo que viene despues del aroba, ejemplo -> cluster-1.nio54.mongodb.net/cafe
+2. Introduce el nombre de la coleccion que buscas 
+3. Activas la opcion de srv
+4. Introduces la opcion de entrar con user y password
+5. Ingresas el user u password ( No de la cuenta de mongo si no el usuario de y clave del clouster que creaste )
+6. Luego te vas al codigo y en donde estaba conectado mongoose localmente ponemos el link que copiamos del clouster ( No olvies poner el usuario y la contraseña  )
+//PARA ACTUALIZAR LAS DEPENDENCIAS --> npm update
+//PARA DESINTALAR -> npm uninstall nombrePaquete
+ 
+mongo "mongodb+srv://cluster-1.nio54.mongodb.net/<dbname>" --username Alava-own
