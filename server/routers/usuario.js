@@ -9,9 +9,9 @@ const { verificarToken , verificarAdmin_Role } = require('../middlewares/autenti
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-    app.get('/', function (req , res) {
-        res.json('Hello World Local');
-    });
+    // app.get('/', function (req , res) {
+    //     res.json('Hello World Local');
+    // });
 
     app.get( '/users' ,  verificarToken , ( req , res ) => {
 
@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
         limit = Number(limit); // asi es como lo pediremos desde postman -> {{url}}/users?limite=15
         //Y si quiero utulizar los dos al mismo tiempo lo hago asi -> {{url}}/users?desde=10&limite=5
 
-        User.find( {} , 'name google email password estado' )
+        User.find( {} , 'name google email password estado img' )
         .skip( desde ) //Skipt es desde que posicion quieres los datos
         .limit( limit )//Limit nos serviara para logicamente poner un limite de datos que queremos ver
                 .exec( ( err , users ) => { //.exec quiere decir que ejecute en este caso el find() y esto es lo que nos tendra la respuesta y la guardara en users
