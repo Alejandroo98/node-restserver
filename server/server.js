@@ -10,7 +10,7 @@ mongoose.set('useCreateIndex', true);
 // parse application/x-www-form-urlencoded
 
 //Configuracion global de rutas
-app.use(require('./routers/index.js'))
+app.use(require('./routers/index.js'));
 
 
 

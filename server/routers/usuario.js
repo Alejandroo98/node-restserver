@@ -58,7 +58,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
     //let body = req.body;  //El req.body es la informacion que provien de postman opcion ->  Body x-www-form-urlencoded
 
     let body = _.pick( req.body , [ 'name' , 'email' , 'img' , 'role' , 'estado' , 'state' , 'password' ] ); //Esto son los unicos valores que tomara en cuenta
-    
+
         let user = new User({
            name : body.name,
            email : body.email,
@@ -70,11 +70,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
        user.save(  ( err , userDB ) => {    //User.save( user , ( err , userDB ) => {   
 
         if( err )
-        return res.status(400).json({
-            ok : false,
-            err
+            return res.status(500).json({
+                ok : false,
+                err
         })
 
+        if( !userDB ){
+            return res.state(400).json({
+                ok : false,
+                err
+            })
+        };
+        
         res.json({
             ok : true,
             usuario : userDB

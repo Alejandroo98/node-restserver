@@ -56,6 +56,19 @@ Aquí cubriremos varios temas como:
 -Crear usuarios personalizados en base a respuestas de Google
 
 
+-------------------------------QUINTA PARTE---------------------------------------------
+Aquí cubriremos varios temas como: 
+
+Tareas
+-CRUD de categorías y productos
+-Relaciones
+-Populate
+-Búsquedas
+-Despliegues a producción
+
+
+
+
 ---------------CREDENCIALES DE LA API DE GOOGLE --------------
 -ID cliente
 968349260182-v4c1a31nd94ttudrmuq900nq9k2s0k8s.apps.googleusercontent.com
@@ -64,5 +77,9 @@ Aquí cubriremos varios temas como:
 zX4zqKrutlfIb_cQece2smiB
 
 
+
+
 //C.100   Good luck 06-11-20       You got it!!    
 //I´m here!!!  I am back and I am still alive  ->  16-11-20!  You get it!
+
+//C. Ultimo capitulo 12/146 ver
