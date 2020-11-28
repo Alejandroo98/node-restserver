@@ -13,7 +13,7 @@ Tips importantes en Postman
 
 //No olvides agregar a los comandos de descarga el comando "--save" por que nuestra app depende de estas dependecias, vaya
 
-------------------------SEGUNDA PARTE----------------------------------------------------
+------------------------SEGUNDA PARTE----------------------------------------------------9
 Aquí cubriremos varios temas como: 
 
 Definir los alcances de nuestro RESTServer
@@ -31,7 +31,7 @@ Eliminación por estado en un campo de la colección
 
 
 
--------------------------------TERCERA PARTE ---------------------------------------------
+-------------------------------TERCERA PARTE ---------------------------------------------10
 Aquí cubriremos varios temas como: 
 
 -Introducción a los tokens
@@ -44,7 +44,7 @@ Aquí cubriremos varios temas como:
 -Uso de Middleware
 
 
--------------------------------CUARTA PARTE ---------------------------------------------
+-------------------------------CUARTA PARTE ---------------------------------------------11
 Aquí cubriremos varios temas como: 
 
 -Generar API Key de Google
@@ -56,7 +56,7 @@ Aquí cubriremos varios temas como:
 -Crear usuarios personalizados en base a respuestas de Google
 
 
--------------------------------QUINTA PARTE---------------------------------------------
+-------------------------------QUINTA PARTE---------------------------------------------12
 Aquí cubriremos varios temas como: 
 
 Tareas
@@ -67,6 +67,24 @@ Tareas
 -Despliegues a producción
 
 
+-------------------------------SEXTA PARTE---------------------------------------------13
+Aquí cubriremos varios temas como: 
+
+Carga de archivos
+Validaciones de archivos
+Reubicar archivos
+Actualizar fotografía de un usuario
+Borrar archivos
+Cargar imágenes a los productos
+Servicio para mostrar y proteger imágenes
+Middleware para verificar token por URL
+Uso de dichas imágenes en el front-end
+--DATO--
+Así lo verán en la próxima clase
+app.use( fileUpload() );
+Pero hay que añadir lo siguiente
+app.use( fileUpload({ useTempFiles: true }) );
+--FIN DATO--
 
 
 ---------------CREDENCIALES DE LA API DE GOOGLE --------------
@@ -82,4 +100,4 @@ zX4zqKrutlfIb_cQece2smiB
 //C.100   Good luck 06-11-20       You got it!!    
 //I´m here!!!  I am back and I am still alive  ->  16-11-20!  You get it!
 
-//C. Ultimo capitulo 12/146 ver
+//C. Ultimo capitulo 13/157 (Por ver)

@@ -125,7 +125,7 @@ app.post('/productos' , verificarToken , ( req , res ) => {
         precio : body.precio,
         user : req.user._id,
         categoria : body.categoria,
-        descripcion : body.descripcion
+        descripcion : body.descripcion,
     });
 
     producto.save( ( err , productoDB ) => {
